@@ -1,0 +1,67 @@
+Clerval CDN Asset Package Proprietary License 1.0 (LicenseRef-Clerval-Proprietary-1.0)
+
+Clerval CDN Asset Packages — Proprietary Software License Agreement
+
+Copyright (c) 2026 Clerval. All rights reserved.
+
+IMPORTANT: READ CAREFULLY BEFORE INSTALLING OR USING THIS SOFTWARE.
+
+This npm package and its bundled assets (the "Software") are the confidential
+and proprietary property of Clerval. The Software is NOT open source and is
+NOT licensed under any open source license (including MIT, Apache, GPL, or
+similar).
+
+1. GRANT OF LICENSE
+
+   Clerval grants you a limited, non-exclusive, non-transferable, revocable
+   license to use the Software solely in connection with the Clerval platform
+   at https://clerval.net (or another server explicitly authorized by Clerval).
+
+2. RESTRICTIONS
+
+   You may NOT, and may NOT permit others to:
+
+   - Copy, modify, adapt, translate, or create derivative works of the
+     Software except as expressly permitted by Clerval;
+   - Reverse engineer, decompile, disassemble, or otherwise attempt to
+     derive the source code of the Software;
+   - Redistribute, sublicense, lease, rent, sell, or otherwise make the
+     Software available to any third party except through Clerval-authorized
+     distribution channels;
+   - Remove or alter any proprietary notices, labels, or marks on the
+     Software;
+   - Use the Software to build, train, or operate a competing product or
+     service that replicates or substitutes Clerval;
+   - Use the Software except as expressly permitted in this Agreement.
+
+3. OWNERSHIP
+
+   Clerval retains all right, title, and interest in and to the Software,
+   including all intellectual property rights. No rights are granted except
+   as expressly stated herein.
+
+4. TERMINATION
+
+   This license terminates automatically if you breach any term of this
+   Agreement. Upon termination, you must cease all use of the Software and
+   destroy all copies in your possession.
+
+5. DISCLAIMER
+
+   THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+
+6. LIMITATION OF LIABILITY
+
+   TO THE MAXIMUM EXTENT PERMITTED BY LAW, CLERVAL SHALL NOT BE LIABLE FOR
+   ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR
+   ANY LOSS OF PROFITS, DATA, OR GOODWILL, ARISING FROM YOUR USE OF THE
+   SOFTWARE.
+
+7. CONTACT
+
+   For licensing inquiries: https://clerval.net
+
+By installing, copying, or using the Software, you agree to be bound by this
+Agreement. If you do not agree, do not install or use the Software.

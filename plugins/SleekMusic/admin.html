@@ -1,0 +1,537 @@
+<style>
+    .sm-admin-fab {
+        position: fixed;
+        right: 24px;
+        bottom: 24px;
+        z-index: 99998;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 10px 16px;
+        border: 0;
+        border-radius: 999px;
+        background: #4a90e2;
+        color: #fff;
+        font: 600 13px/1.2 -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+        box-shadow: 0 8px 24px rgba(74, 144, 226, 0.35);
+        cursor: pointer;
+        transition: background 0.18s ease, transform 0.18s ease;
+    }
+
+    .sm-admin-fab:hover {
+        background: #3b7fd1;
+        transform: translateY(-1px);
+    }
+
+    .sm-admin-fab.is-hidden {
+        display: none;
+    }
+
+    #wmd-music-button span {
+        color: #3f7fd9;
+        font-size: 17px;
+        font-weight: 700;
+        line-height: 1;
+    }
+
+    #wmd-music-button:hover span {
+        color: #2f6fd0;
+    }
+
+    .sm-admin-fab span:first-child {
+        font-size: 17px;
+        line-height: 1;
+    }
+
+    .sm-admin-modal[hidden] {
+        display: none;
+    }
+
+    .sm-admin-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background: rgba(15, 23, 42, 0.48);
+        -webkit-backdrop-filter: blur(3px);
+        backdrop-filter: blur(3px);
+    }
+
+    .sm-admin-dialog {
+        width: 560px;
+        max-width: 100%;
+        max-height: calc(100vh - 40px);
+        overflow: auto;
+        border-radius: 14px;
+        background: #fff;
+        color: #202733;
+        box-shadow: 0 24px 70px rgba(15, 23, 42, 0.28);
+        font: 13px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+    }
+
+    .sm-admin-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 17px 20px 13px;
+        border-bottom: 1px solid #edf0f4;
+    }
+
+    .sm-admin-head strong {
+        font-size: 16px;
+        font-weight: 650;
+    }
+
+    .sm-admin-head small {
+        display: block;
+        margin-top: 2px;
+        color: #98a1ad;
+        font-size: 11px;
+        font-weight: 400;
+    }
+
+    .sm-admin-close {
+        display: grid;
+        place-items: center;
+        width: 28px;
+        height: 28px;
+        padding: 0;
+        border: 0;
+        border-radius: 50%;
+        background: #f2f4f7;
+        color: #8c95a1;
+        font-size: 18px;
+        line-height: 1;
+        cursor: pointer;
+    }
+
+    .sm-admin-close:hover {
+        background: #e9edf2;
+        color: #5b6470;
+    }
+
+    .sm-admin-tabs {
+        display: flex;
+        gap: 4px;
+        padding: 12px 20px 0;
+    }
+
+    .sm-admin-tab {
+        padding: 7px 13px;
+        border: 0;
+        border-radius: 8px;
+        background: transparent;
+        color: #7d8794;
+        font-size: 12.5px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .sm-admin-tab.is-active {
+        background: #eef5ff;
+        color: #2f70ca;
+    }
+
+    .sm-admin-panel {
+        padding: 14px 20px 20px;
+    }
+
+    .sm-admin-panel[hidden] {
+        display: none;
+    }
+
+    .sm-admin-field {
+        display: block;
+        margin-bottom: 11px;
+    }
+
+    .sm-admin-field > span {
+        display: block;
+        margin-bottom: 4px;
+        color: #7d8794;
+        font-size: 11.5px;
+        font-weight: 500;
+    }
+
+    .sm-admin-field input {
+        display: block;
+        width: 100%;
+        height: 36px;
+        padding: 0 10px;
+        border: 1px solid #e3e7ed;
+        border-radius: 8px;
+        background: #fbfcfe;
+        color: #202733;
+        font: 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+        outline: 0;
+        box-sizing: border-box;
+    }
+
+    .sm-admin-field input:focus {
+        border-color: #79aef0;
+        background: #fff;
+        box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.12);
+    }
+
+    .sm-admin-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .sm-admin-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 4px;
+    }
+
+    .sm-admin-insert {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 9px 16px;
+        border: 0;
+        border-radius: 8px;
+        background: #4a90e2;
+        color: #fff;
+        font-size: 12.5px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .sm-admin-insert:hover {
+        background: #3b7fd1;
+    }
+
+    .sm-admin-hint {
+        margin: 9px 0 0;
+        color: #98a1ad;
+        font-size: 11px;
+        line-height: 1.6;
+    }
+
+    .sm-admin-hint code {
+        padding: 1px 4px;
+        border-radius: 4px;
+        background: #f2f4f7;
+        color: #5d6673;
+        font-size: 10.5px;
+    }
+
+    .sm-admin-toast {
+        position: fixed;
+        left: 50%;
+        bottom: 34px;
+        z-index: 100000;
+        padding: 8px 15px;
+        border-radius: 999px;
+        background: rgba(25, 32, 42, 0.92);
+        color: #fff;
+        font: 12px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+        opacity: 0;
+        pointer-events: none;
+        transform: translate(-50%, 8px);
+        transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .sm-admin-toast.is-show {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+
+    @media (max-width: 640px) {
+        .sm-admin-fab {
+            right: 14px;
+            bottom: 14px;
+            padding: 9px 13px;
+        }
+
+        .sm-admin-row {
+            grid-template-columns: 1fr;
+        }
+
+        .sm-admin-dialog {
+            max-height: calc(100vh - 24px);
+        }
+    }
+</style>
+
+<button type="button" class="sm-admin-fab" id="sm-admin-open" aria-haspopup="dialog">
+    <span>♪</span><span>插入音乐</span>
+</button>
+
+<div class="sm-admin-modal" id="sm-admin-modal" hidden>
+    <div class="sm-admin-dialog" role="dialog" aria-modal="true" aria-labelledby="sm-admin-title">
+        <div class="sm-admin-head">
+            <div>
+                <strong id="sm-admin-title">插入音乐</strong>
+                <small>SleekMusic · 支持普通音乐和网易云歌曲</small>
+            </div>
+            <button type="button" class="sm-admin-close" id="sm-admin-close" aria-label="关闭">×</button>
+        </div>
+
+        <div class="sm-admin-tabs">
+            <button type="button" class="sm-admin-tab is-active" data-sm-tab="music">音乐链接</button>
+            <button type="button" class="sm-admin-tab" data-sm-tab="netease">网易云</button>
+        </div>
+
+        <div class="sm-admin-panel" data-sm-panel="music">
+            <label class="sm-admin-field">
+                <span>音乐地址（必填，mp3）</span>
+                <input type="url" id="sm-admin-url" placeholder="https://example.com/song.mp3">
+            </label>
+            <div class="sm-admin-row">
+                <label class="sm-admin-field">
+                    <span>歌曲标题</span>
+                    <input type="text" id="sm-admin-title-input" placeholder="例如：Traveling Light">
+                </label>
+                <label class="sm-admin-field">
+                    <span>歌手</span>
+                    <input type="text" id="sm-admin-artist" placeholder="例如：Joel Hanson">
+                </label>
+            </div>
+            <label class="sm-admin-field">
+                <span>封面地址（可选）</span>
+                <input type="url" id="sm-admin-cover" placeholder="https://example.com/cover.jpg">
+            </label>
+            <div class="sm-admin-actions">
+                <button type="button" class="sm-admin-insert" id="sm-admin-insert">插入播放器</button>
+            </div>
+            <p class="sm-admin-hint">会插入 <code>[music url="..." title="..." artist="..." cover="..."]</code>，前台显示音乐卡片。</p>
+        </div>
+
+        <div class="sm-admin-panel" data-sm-panel="netease" hidden>
+            <label class="sm-admin-field">
+                <span>网易云歌曲 ID 或链接</span>
+                <input type="text" id="sm-admin-163" placeholder="例如：1491585 或 music.163.com/song?id=1491585">
+            </label>
+            <div class="sm-admin-actions">
+                <button type="button" class="sm-admin-insert" id="sm-admin-insert-163">插入网易云</button>
+            </div>
+            <p class="sm-admin-hint">会插入 <code>[163 id="..."]</code>，首页自动解析为歌曲卡片，左上角播放器可播放。</p>
+        </div>
+    </div>
+</div>
+
+<div class="sm-admin-toast" id="sm-admin-toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+    'use strict';
+
+    var fab = document.getElementById('sm-admin-open');
+    var modal = document.getElementById('sm-admin-modal');
+    var close = document.getElementById('sm-admin-close');
+    var toast = document.getElementById('sm-admin-toast');
+    var toastTimer = 0;
+    var savedRange = null;
+
+    if (!modal) {
+        return;
+    }
+
+    function showToast(message) {
+        if (!toast) {
+            return;
+        }
+
+        toast.textContent = message;
+        toast.classList.add('is-show');
+        window.clearTimeout(toastTimer);
+        toastTimer = window.setTimeout(function () {
+            toast.classList.remove('is-show');
+        }, 1800);
+    }
+
+    function setOpen(value) {
+        modal.hidden = !value;
+        document.documentElement.style.overflow = value ? 'hidden' : '';
+    }
+
+    function insertAtCursor(text) {
+        var textarea = document.querySelector('textarea[name="text"], #text');
+        var wrapper = document.querySelector('.CodeMirror');
+
+        if (wrapper && wrapper.CodeMirror && typeof wrapper.CodeMirror.replaceSelection === 'function') {
+            wrapper.CodeMirror.replaceSelection(text);
+            wrapper.CodeMirror.focus();
+            return true;
+        }
+
+        if (!textarea) {
+            return false;
+        }
+
+        var start = savedRange ? savedRange.start : (typeof textarea.selectionStart === 'number' ? textarea.selectionStart : textarea.value.length);
+        var end = savedRange ? savedRange.end : (typeof textarea.selectionEnd === 'number' ? textarea.selectionEnd : start);
+        savedRange = null;
+
+        if (typeof textarea.setRangeText === 'function') {
+            textarea.setRangeText(text, start, end, 'end');
+        } else {
+            textarea.value = textarea.value.slice(0, start) + text + textarea.value.slice(end);
+            textarea.selectionStart = textarea.selectionEnd = start + text.length;
+        }
+
+        textarea.dispatchEvent(new Event('input', { bubbles: true }));
+        textarea.focus();
+
+        return true;
+    }
+
+    function attr(name, value) {
+        value = String(value || '').trim();
+
+        if (!value) {
+            return '';
+        }
+
+        return ' ' + name + '="' + value.replace(/"/g, '&quot;') + '"';
+    }
+
+    function insertMusic() {
+        var url = document.getElementById('sm-admin-url').value.trim();
+        var title = document.getElementById('sm-admin-title-input').value.trim();
+        var artist = document.getElementById('sm-admin-artist').value.trim();
+        var cover = document.getElementById('sm-admin-cover').value.trim();
+
+        if (!url) {
+            showToast('请先填写音乐地址');
+            document.getElementById('sm-admin-url').focus();
+            return;
+        }
+
+        var code = '[music' + attr('url', url) + attr('title', title) + attr('artist', artist) + attr('cover', cover) + ']';
+
+        if (!insertAtCursor(code)) {
+            showToast('没有找到文章编辑框');
+            return;
+        }
+
+        showToast('已插入音乐播放器');
+        setOpen(false);
+    }
+
+    function insertNetease() {
+        var value = document.getElementById('sm-admin-163').value.trim();
+        var match = value.match(/[?&]id=(\d+)/) || value.match(/^(\d+)$/) || value.match(/(\d{3,})/);
+
+        if (!match) {
+            showToast('请输入网易云歌曲 ID 或链接');
+            document.getElementById('sm-admin-163').focus();
+            return;
+        }
+
+        var code = '[163 id="' + match[1] + '"]';
+
+        if (!insertAtCursor(code)) {
+            showToast('没有找到文章编辑框');
+            return;
+        }
+
+        showToast('已插入网易云音乐');
+        setOpen(false);
+    }
+
+    function openModal() {
+        var textarea = document.querySelector('textarea[name="text"], #text');
+
+        if (textarea && typeof textarea.selectionStart === 'number') {
+            savedRange = {
+                start: textarea.selectionStart,
+                end: textarea.selectionEnd
+            };
+        }
+
+        setOpen(true);
+        var url = document.getElementById('sm-admin-url');
+
+        if (url) {
+            window.setTimeout(function () {
+                url.focus();
+            }, 80);
+        }
+    }
+
+    function attachToolbarButton() {
+        var row = document.getElementById('wmd-button-row');
+
+        if (!row || document.getElementById('wmd-music-button')) {
+            return !!row;
+        }
+
+        var button = document.createElement('li');
+        button.className = 'wmd-button';
+        button.id = 'wmd-music-button';
+        button.title = '插入音乐';
+        button.setAttribute('aria-label', '插入音乐');
+        button.innerHTML = '<span>♪</span>';
+        button.addEventListener('click', openModal);
+
+        var imageButton = document.getElementById('wmd-image-button');
+
+        if (imageButton && imageButton.parentNode === row) {
+            row.insertBefore(button, imageButton.nextSibling);
+        } else {
+            row.appendChild(button);
+        }
+
+        if (fab) {
+            fab.classList.add('is-hidden');
+        }
+
+        return true;
+    }
+
+    if (fab) {
+        fab.addEventListener('click', openModal);
+    }
+
+    if (!attachToolbarButton() && 'MutationObserver' in window) {
+        var toolbarObserver = new MutationObserver(function () {
+            if (attachToolbarButton()) {
+                toolbarObserver.disconnect();
+            }
+        });
+        toolbarObserver.observe(document.body, { childList: true, subtree: true });
+    }
+
+    close.addEventListener('click', function () {
+        setOpen(false);
+    });
+
+    modal.addEventListener('click', function (event) {
+        if (event.target === modal) {
+            setOpen(false);
+        }
+    });
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && !modal.hidden) {
+            setOpen(false);
+        }
+    });
+
+    Array.prototype.forEach.call(document.querySelectorAll('[data-sm-tab]'), function (tab) {
+        tab.addEventListener('click', function () {
+            var name = tab.getAttribute('data-sm-tab');
+
+            Array.prototype.forEach.call(document.querySelectorAll('[data-sm-tab]'), function (item) {
+                item.classList.toggle('is-active', item === tab);
+            });
+
+            Array.prototype.forEach.call(document.querySelectorAll('[data-sm-panel]'), function (panel) {
+                panel.hidden = panel.getAttribute('data-sm-panel') !== name;
+            });
+        });
+    });
+
+    document.getElementById('sm-admin-insert').addEventListener('click', insertMusic);
+    document.getElementById('sm-admin-insert-163').addEventListener('click', insertNetease);
+})();
+</script>
