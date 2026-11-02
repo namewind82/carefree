@@ -311,15 +311,9 @@
                 return;
             }
 
-            var nav = hero.dataset.headerStyle === 'wechat'
-                ? hero.querySelector('.hero-cover')
-                : hero.querySelector('.hero-nav');
-
-            if (!nav) {
-                return;
-            }
-
-            var show = nav.getBoundingClientRect().bottom <= 8;
+            var scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
+            var canScroll = document.documentElement.scrollHeight > window.innerHeight + 2;
+            var show = scrollTop > 2 || !canScroll;
             var visible = compactNav.classList.contains('is-visible');
 
             if (show === visible) {

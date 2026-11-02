@@ -4,7 +4,7 @@
  *
  * @package Carefree
  * @author Carefree
- * @version 3.3.14
+ * @version 3.3.15
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) {
