@@ -52,7 +52,7 @@ foreach ($sleekNav as $sleekNavItem) {
     </script>
     <?php if ($this->is('index')): ?>
     <?php endif; ?>
-    <link rel="stylesheet" href="<?php echo sleek_theme_url('assets/css/style.css'); ?>?v=3.3.13">
+    <link rel="stylesheet" href="<?php echo sleek_theme_url('assets/css/style.css'); ?>?v=3.3.14">
     <style>
         :root {
             --accent: <?php echo $sleekPalette['accent']; ?>;

@@ -66,8 +66,8 @@
     </button>
 </div>
 
-<script src="<?php echo sleek_theme_url('assets/js/main.js'); ?>?v=3.3.13"></script>
-<script src="<?php echo sleek_theme_url('assets/js/pjax.js'); ?>?v=3.3.13"></script>
+<script src="<?php echo sleek_theme_url('assets/js/main.js'); ?>?v=3.3.14"></script>
+<script src="<?php echo sleek_theme_url('assets/js/pjax.js'); ?>?v=3.3.14"></script>
 <?php $this->footer(); ?>
 </body>
 </html>

@@ -14633,3 +14633,110 @@ html.dark .compact-nav-glass {
     grid-row: 2;
     justify-self: end;
 }
+
+/* Unified taxonomy hero */
+.taxonomy-hero {
+    align-items: center;
+}
+
+.taxonomy-hero-main {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+}
+
+.taxonomy-badge {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border: 1px solid rgba(var(--accent-rgb), 0.18);
+    border-radius: 14px;
+    background: rgba(var(--accent-rgb), 0.10);
+    color: var(--accent-strong);
+}
+
+.taxonomy-badge .icon {
+    width: 23px;
+    height: 23px;
+}
+
+.taxonomy-crumb {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+    color: var(--muted);
+    font-size: 10.5px;
+    line-height: 1.4;
+}
+
+.taxonomy-crumb a {
+    color: var(--muted);
+}
+
+.taxonomy-crumb a:hover {
+    color: var(--accent-strong);
+}
+
+.taxonomy-crumb span[aria-hidden] {
+    opacity: 0.5;
+}
+
+.taxonomy-hero .archive-kicker {
+    font-size: 9.5px;
+    letter-spacing: 0.17em;
+}
+
+.taxonomy-hero .archive-hero-title {
+    margin-top: 2px;
+    font-size: 28px;
+}
+
+.taxonomy-hero .archive-stats {
+    align-self: stretch;
+}
+
+html.dark .taxonomy-badge {
+    background: rgba(var(--accent-rgb), 0.16);
+    border-color: rgba(var(--accent-rgb), 0.26);
+}
+
+@media (max-width: 700px) {
+    .taxonomy-hero {
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .taxonomy-hero-main {
+        gap: 12px;
+    }
+
+    .taxonomy-badge {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+    }
+
+    .taxonomy-badge .icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .taxonomy-hero .archive-hero-title {
+        font-size: 22px;
+    }
+
+    .taxonomy-hero .archive-stats {
+        width: 100%;
+        padding-top: 12px;
+        padding-left: 0;
+        border-top: 1px solid rgba(var(--accent-rgb), 0.14);
+        border-left: 0;
+    }
+}
