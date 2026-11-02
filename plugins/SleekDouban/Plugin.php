@@ -8,7 +8,7 @@
  *
  * @package SleekDouban
  * @author  心斋
- * @version 1.0.9
+ * @version 1.1.0
  * @link    https://www.xinzhai.work/
  */
 
@@ -21,7 +21,7 @@ use Typecho\Widget\Helper\Form\Element\Text;
 
 class Plugin implements PluginInterface
 {
-    const VERSION = '1.0.9';
+    const VERSION = '1.1.0';
 
     public static function activate()
     {
@@ -101,18 +101,31 @@ class Plugin implements PluginInterface
                 $db->query(
                     $db->insert('table.options')->rows(array(
                         'name' => 'plugin:SleekDouban',
-                        'value' => serialize($defaults),
+                        'value' => json_encode($defaults, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
                         'user' => 0,
                     ))
                 );
             } else {
-                $value = @unserialize($row['value']);
-                $merged = array_merge($defaults, is_array($value) ? $value : array());
+                $raw = (string) $row['value'];
+                $value = json_decode($raw, true);
+                $isJson = is_array($value);
 
-                if (!is_array($value) || $merged !== $value) {
+                if (!$isJson) {
+                    $value = @unserialize($raw);
+                }
+
+                if (!is_array($value)) {
+                    $value = array();
+                }
+
+                $merged = array_merge($defaults, $value);
+
+                if (!$isJson || $merged !== $value) {
+                    $encoded = json_encode($merged, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
                     $db->query(
                         $db->update('table.options')
-                            ->rows(array('value' => serialize($merged)))
+                            ->rows(array('value' => $encoded))
                             ->where('name = ?', 'plugin:SleekDouban')
                             ->where('user = ?', 0)
                     );
@@ -205,11 +218,12 @@ class Plugin implements PluginInterface
     /**
      * 保存插件设置后清除缓存
      */
-    public static function configHandle($settings, $isInit)
+    public static function configCheck($settings)
     {
-        if (!$isInit) {
-            self::clearPageCache();
-        }
+        self::ensureConfig();
+        self::clearPageCache();
+
+        return null;
     }
 
     /**
