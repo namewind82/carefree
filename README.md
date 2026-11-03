@@ -2,7 +2,7 @@
 
 Carefree 是一款面向个人博客的 Typecho 说说流主题：白色卡片、灰色页面、单列信息流，兼顾文章、图片、音乐、归档、相册、豆瓣和友链页面。
 
-当前主题版本：**3.3.13**
+当前主题版本：**3.3.15**
 
 ![Carefree 主题预览](carefree/screenshot.png)
 
@@ -43,7 +43,7 @@ plugins/
 | --- | --- | --- |
 | SleekMusic | 1.9.19 | 首页悬浮歌单、文章内联播放器、歌词与网易云歌曲 |
 | SleekSticky | 1.0.3 | 在撰写页设置置顶文章，首页和列表优先展示 |
-| SleekDouban | 1.0.9 | 豆瓣书籍、电影收藏页面 |
+| SleekDouban | 1.1.0 | 豆瓣书籍、电影收藏页面 |
 | BilibiliPlayer | 1.1.1 | 将 Bilibili iframe 包装为响应式播放器，兼容 Carefree 首页卡片 |
 
 `BilibiliPlayer` 保留旧版 `BilibiliPlayer_Plugin` 类名别名，升级 Typecho 后无需重新激活。
